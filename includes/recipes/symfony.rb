@@ -34,8 +34,8 @@ namespace :symfony do
   DESC
   task :configure_database do
     run <<-CMD
-      #{current_path}/symfony configure:database '#{db_adapter}:host=#{db_host};dbname=#{db_name}' #{db_user} #{db_pass};
-      #{current_path}/symfony configure:database --env=#{env} '#{db_adapter}:host=#{db_host};dbname=#{db_name}' #{db_user} #{db_pass};
+      #{latest_release}/symfony configure:database '#{db_adapter}:host=#{db_host};dbname=#{db_name}' #{db_user} #{db_pass};
+      #{latest_release}/symfony configure:database --env=#{env} '#{db_adapter}:host=#{db_host};dbname=#{db_name}' #{db_user} #{db_pass};
     CMD
   end
 
