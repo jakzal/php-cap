@@ -45,6 +45,7 @@ namespace :symfony do
   task :create_symlinks do
     run <<-CMD
       rm -f #{latest_release}/web/sf && rm -f #{latest_release}/lib/vendor/symfony &&
+      rm -rf #{latest_release}/web/uploads && rm -rf #{latest_release}/log &&
       ln -s #{shared_path}/log #{latest_release}/log &&
       ln -s #{shared_path}/uploads #{latest_release}/web/uploads &&
       ln -s #{shared_path}/symfony-#{symfony_version} #{latest_release}/lib/vendor/symfony &&
