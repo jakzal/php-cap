@@ -123,14 +123,16 @@ namespace :symfony do
       Enables symfony project.
     DESC
     task :enable do
-      run "#{php_command} #{current_path}/symfony project:enable #{env}"
+      project_path = previous_release ? current_path : latest_release
+      run "#{php_command} #{project_path}/symfony project:enable #{env}"
     end
 
     desc <<-DESC
       Disables symfony project.
     DESC
     task :disable do
-      run "#{php_command} #{current_path}/symfony project:disable #{env}"
+      project_path = previous_release ? current_path : latest_release
+      run "#{php_command} #{project_path}/symfony project:disable #{env}"
     end
   end
 end
