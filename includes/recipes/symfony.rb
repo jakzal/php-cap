@@ -16,7 +16,7 @@ namespace :symfony do
     configure
     normalize_asset_timestamps
     publish_assets
-    build_model
+    build_classes
     clear_controllers
     clear_cache
     set_permissions
@@ -72,9 +72,9 @@ namespace :symfony do
   end
 
   desc <<-DESC
-    Builds doctrine model.
+    Builds doctrine model, form and filter classes.
   DESC
-  task :build_model do
+  task :build_classes do
     run "#{php_command} #{latest_release}/symfony doctrine:build --all-classes"
   end
 
@@ -82,7 +82,7 @@ namespace :symfony do
     Removes development controllers.
   DESC
   task :clear_controllers do
-    run "#{php_command} #{latest_release}/symfony project:clear-controllers"
+    run "#{php_command} #{latest_release}/symfony project:clear-controllers" if fetch(:clear_controllers, true)
   end
 
   desc <<-DESC
