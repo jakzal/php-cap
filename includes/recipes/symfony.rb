@@ -134,7 +134,7 @@ namespace :symfony do
   end
 end
 
-after 'deploy:finalize_update', 'symfony:finalize_update'
+before 'deploy:finalize_update', 'symfony:finalize_update'
 before 'deploy:set_permissions', 'symfony:get_symfony'
 after 'deploy:migrate', 'symfony:migrate'
 after 'deploy:web:enable', 'symfony:web:enable'
