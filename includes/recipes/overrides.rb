@@ -1,4 +1,7 @@
 set :shared_children, %w()
+set :user, ''
+set :group, ''
+set :change_ownership, false
 
 # Set of capistrano overrides for PHP projects. Original tasks doesn't 
 # make too much sense in PHP. These tasks are project specific and therefore
@@ -15,6 +18,7 @@ namespace :deploy do
     Sets write permissions on the latest release directory.
   DESC
   task :finalize_update, :except => { :no_release => true } do
+    run "chown -R #{user}:#{group} #{latest_release}" if fetch(:change_ownership, false)
     run "chmod -R g+w #{latest_release}" if fetch(:group_writable, true)
   end
 
