@@ -6,6 +6,7 @@ set :db_adapter, 'pgsql'
 set :db_host, 'localhost'
 set :db_user, ''
 set :db_pass, ''
+set :remove_dev_controllers, true
 
 namespace :symfony do
   desc <<-DESC
@@ -82,7 +83,7 @@ namespace :symfony do
     Removes development controllers.
   DESC
   task :clear_controllers do
-    run "#{php_command} #{latest_release}/symfony project:clear-controllers" if fetch(:clear_controllers, true)
+    run "#{php_command} #{latest_release}/symfony project:clear-controllers" if fetch(:remove_dev_controllers, true)
   end
 
   desc <<-DESC
