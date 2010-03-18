@@ -118,7 +118,7 @@ namespace :symfony do
     run "#{php_command} #{latest_release}/symfony doctrine:migrate --env=#{env}"
   end
 
-  task :web do
+  namespace :web do
     desc <<-DESC
       Enables symfony project.
     DESC
@@ -137,6 +137,8 @@ end
 
 before 'deploy:finalize_update', 'symfony:finalize_update'
 before 'deploy:set_permissions', 'symfony:get_symfony'
+before 'deploy:migrate', 'deploy:web:disable'
+after 'deploy:migrate', 'deploy:web:enable'
 after 'deploy:migrate', 'symfony:migrate'
 after 'deploy:web:enable', 'symfony:web:enable'
 after 'deploy:web:disable', 'symfony:web:disable'
