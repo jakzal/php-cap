@@ -19,7 +19,7 @@ namespace :symfony do
     build_model
     clear_controllers
     clear_cache
-    fix_permissions
+    set_permissions
   end
 
   desc <<-DESC
@@ -95,7 +95,7 @@ namespace :symfony do
   desc <<-DESC
     Fixes file permissions.
   DESC
-  task :fix_permissions do
+  task :set_permissions do
     run "#{php_command} #{latest_release}/symfony project:permissions"
   end
 
@@ -135,7 +135,7 @@ namespace :symfony do
 end
 
 after 'deploy:finalize_update', 'symfony:finalize_update'
-after 'deploy:setup', 'symfony:get_symfony'
+before 'deploy:set_permissions', 'symfony:get_symfony'
 after 'deploy:migrate', 'symfony:migrate'
 after 'deploy:web:enable', 'symfony:web:enable'
 after 'deploy:web:disable', 'symfony:web:disable'

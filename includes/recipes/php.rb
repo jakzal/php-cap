@@ -18,8 +18,8 @@ namespace :deploy do
     Sets write permissions on the latest release directory.
   DESC
   task :finalize_update, :except => { :no_release => true } do
-    run "chown -R #{user}:#{group} #{latest_release}" if fetch(:change_ownership, false)
     run "chmod -R g+w #{latest_release}" if fetch(:group_writable, true)
+    run "chown -R #{user}:#{group} #{latest_release}" if fetch(:change_ownership, false)
   end
 
   desc <<-DESC
@@ -40,6 +40,13 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
   end
 
+  desc <<-DESC
+    Sets directory permissions.
+  DESC
+  task :set_permissions do
+    run "chown -R #{user}:#{group} #{deploy_to}" if fetch(:change_ownership, false)
+  end
+
   namespace :web do
     desc <<-DESC
       Disables the application. Most likely you would want to 
@@ -55,4 +62,6 @@ namespace :deploy do
     end
   end
 end
+
+after 'deploy:setup', 'deploy:set_permissions'
 
