@@ -6,7 +6,7 @@ set :use_sudo, false
 
 default_run_options[:pty] = true
 
-load './includes/recipes/php'
+load './config/recipes/php'
 require 'capistrano/ext/multistage'
-load "./includes/recipes/#{application}"
+load "./config/recipes/#{application}"
 

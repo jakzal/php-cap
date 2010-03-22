@@ -1,0 +1,2 @@
+load './config/recipes/symfony'
+

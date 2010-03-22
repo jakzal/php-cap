@@ -1,2 +1,0 @@
-load './includes/recipes/symfony'
-
