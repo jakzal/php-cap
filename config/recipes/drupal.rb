@@ -1,4 +1,4 @@
-set :shared_children, shared_children + %w(log files dump)
+set :shared_children, shared_children + %w(log files)
 
 namespace :drupal do
   task :finalize_update do
