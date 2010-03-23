@@ -1,6 +1,6 @@
 set :domain, 'kuba.dev'
 set :env, 'prod'
-set :deploy_via, "export"
+set :deploy_via, :export
 set :deploy_to, "/var/www/kuba.dev"
 set :repository,  "svn+ssh://localhost/kuba"
 set :symfony_version, '1.4.3'
