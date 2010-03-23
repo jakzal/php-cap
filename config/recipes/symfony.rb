@@ -105,9 +105,11 @@ namespace :symfony do
   DESC
   task :get_symfony do
     run <<-CMD
-      cd #{shared_path}; wget -q http://www.symfony-project.org/get/symfony-#{symfony_version}.tgz;
-      cd #{shared_path}; tar xzf symfony-#{symfony_version}.tgz;
-      rm -f #{shared_path}/symfony-#{symfony_version}.tgz;
+      if [ ! -d #{shared_path}/symfony-#{symfony_version} ]; then
+        cd #{shared_path}; wget -q http://www.symfony-project.org/get/symfony-#{symfony_version}.tgz;
+        cd #{shared_path}; tar xzf symfony-#{symfony_version}.tgz;
+        rm -f #{shared_path}/symfony-#{symfony_version}.tgz;
+      fi
     CMD
   end
 
