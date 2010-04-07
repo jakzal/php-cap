@@ -1,4 +1,6 @@
 set :domain, 'kuba.dev'
+set :user, 'kuba'
+set :group, 'apache'
 set :env, 'prod'
 set :deploy_via, :export
 set :deploy_to, "/var/www/kuba.dev"
