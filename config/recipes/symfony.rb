@@ -1,5 +1,5 @@
 set :shared_children, shared_children + %w(log uploads)
-set :symfony_version, '1.4.3'
+set :symfony_version, '1.4.4'
 set :php_command, 'php -d memory_limit=512M'
 set :env, 'prod'
 set :db_adapter, 'pgsql'
@@ -77,6 +77,20 @@ namespace :symfony do
   DESC
   task :build_classes do
     run "#{php_command} #{latest_release}/symfony doctrine:build --all-classes"
+  end
+
+  desc <<-DESC
+    Builds everything without a confirmation.
+  DESC
+  task :build_all do
+    run "#{php_command} #{latest_release}/symfony doctrine:build --all --no-confirmation"
+  end
+
+  desc <<-DESC
+    Loads fixtures.
+  DESC
+  task :data_load do
+    run "#{php_command} #{latest_release}/symfony doctrine:data-load"
   end
 
   desc <<-DESC
